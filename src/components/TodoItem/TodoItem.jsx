@@ -1,14 +1,25 @@
 import React from 'react';
-
+import TodoListAPI from '../../api/TodoListAPI';
 class TodoItem extends React.Component {
 
     markTodoItem = event => {
-        this.props.markTodo(this.props.id);
+        console.log(!this.props.isMarked);
+
+        const newTodo = {
+            status: !this.props.isMarked
+        }
+
+        TodoListAPI.updateTodoById(this.props.id, newTodo).then(response => {
+            console.log(response.data);
+            this.props.markTodo(this.props.id);
+        })
     }
 
     deleteTodo = event => {
         event.stopPropagation();
-        this.props.deleteTodo(this.props.id);
+        TodoListAPI.deleteTodoById(this.props.id).then(response => {
+            this.props.deleteTodo(this.props.id);
+        })
     }
 
     render() {

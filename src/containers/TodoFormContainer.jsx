@@ -1,12 +1,18 @@
 import { connect } from 'react-redux';
 import TodoForm from '../components/TodoForm/TodoForm';
 import { ADD_TODO } from '../actions';
+import TodoListAPI from '../api/TodoListAPI';
 
-const mapDispatchToProps = dispatch => ({
-    addTodo: text => {
-        dispatch(ADD_TODO(text));
+const mapDispatchToProps = dispatch => {
+    return {
+        addTodo: todo => {
+            dispatch({
+                type: "ADD_TODO",
+                todo: todo
+            })
+        }
     }
-})
+}
 
 export default connect(
     null,

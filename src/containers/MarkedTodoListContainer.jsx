@@ -1,20 +1,35 @@
 import { connect } from 'react-redux';
-import MarkedTodoList from '../components/TodoList/MarkedTodoList';
-import { MARK_MARKED_TODO, REMOVE_MARKED_TODO } from '../actions';
+import TodoList from '../components/TodoList/TodoList';
+
 
 const mapStateToProps = state => {
     return {
-        todoList: state.todoList
+        todoList: state.todoList.filter(item => { item.status === true })
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        markToDo: index => {
-            dispatch(MARK_MARKED_TODO(index));
+        markToDo:  (id, todo) => {
+            dispatch({
+                type: "MARK_TODO",
+                id: id,
+                todo: todo
+            })
         },
-        removeTodo: index => {
-            dispatch(REMOVE_MARKED_TODO(index));
+        removeTodo:  id => {
+            dispatch({
+                type: "REMOVE_TODO",
+                id: id
+            })
+        },
+
+        initTodo: todo => {
+            dispatch({
+                type: "INIT_TODO",
+                todo: todo
+            });
+            // dispatch(INIT_TODO(todo))
         }
     }
 }
@@ -22,4 +37,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MarkedTodoList);
+)(TodoList);

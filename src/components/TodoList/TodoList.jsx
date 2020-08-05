@@ -1,21 +1,28 @@
 import React from 'react';
 import TodoItem from '../TodoItem/TodoItem';
+import TodoListAPI from '../../api/TodoListAPI';
 
 class TodoList extends React.Component {
 
-    markTodo = index => {
-        this.props.markToDo(index);
+    markTodo = id => {
+        this.props.markToDo(id);
     }
 
-    deleteTodo = index => {
-        this.props.removeTodo(index);
+    deleteTodo = id => {
+        this.props.removeTodo(id);
+    }
+
+    componentDidMount() {
+        TodoListAPI.getAllTodos().then(response => {
+            this.props.initTodo(response.data);
+        })
     }
 
     render() {
         return (
             <div className="todo_container">
                 {
-                    this.props.todoList.map((value, index) => <TodoItem key={index} id={index} isMarked={value.isMarked} value={value.text} deleteTodo={this.deleteTodo} markTodo={this.markTodo} />)
+                    this.props.todoList.map((value, index) => <TodoItem key={index} id={value.id} isMarked={value.status} value={value.content} deleteTodo={this.deleteTodo} markTodo={this.markTodo} />)
                 }
             </div>
         );

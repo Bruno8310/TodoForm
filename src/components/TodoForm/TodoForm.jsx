@@ -1,18 +1,18 @@
 import React from 'react';
-
+import TodoListAPI from '../../api/TodoListAPI';
 class TodoForm extends React.Component {
 
     constructor() {
         super();
 
         this.state = {
-            inputValue: ""
+            inputValue: "",
         }
     }
 
     handleInput = (event) => {
         this.setState({
-            inputValue: event.target.value
+            inputValue: event.target.value,
         })
     }
 
@@ -22,12 +22,21 @@ class TodoForm extends React.Component {
             alert("Please input todo list valid.");
             return;
         } 
-        this.setState({
-            inputValue: ""
-        });
-        this.props.addTodo(this.state.inputValue);
-    }
 
+        let todo = {
+            content: this.state.inputValue,
+            status: false
+        }
+
+        this.setState({
+            inputValue: "",
+        });
+
+        TodoListAPI.createTodo(todo).then(response => {
+            console.log(response.data);
+            this.props.addTodo(response.data);
+        })
+    }
 
     render() {
         return (
