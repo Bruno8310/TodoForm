@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const TODO_LIST_API_URL = "https://5e9ec500fb467500166c4658.mockapi.io/todos"
+const TODO_LIST_API_URL = "http://localhost:8080/todos"
 
 class TodoListAPI {
 

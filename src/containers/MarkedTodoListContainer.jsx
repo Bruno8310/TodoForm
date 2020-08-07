@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
-import TodoList from '../components/TodoList/TodoList';
+import MarkTodoList from '../components/MarkedTodoList/MarkTodoList';
 
 
 const mapStateToProps = state => {
     return {
-        todoList: state.todoList.filter(item => { item.status === true })
+        // todoList: state.todoList.filter(item => { item.status === true })
+        todoList: state.todoList
     }
 }
 
@@ -24,9 +25,9 @@ const mapDispatchToProps = dispatch => {
             })
         },
 
-        initTodo: todo => {
+        init_marked_todo: todo => {
             dispatch({
-                type: "INIT_TODO",
+                type: "INIT_MARKED_TODO",
                 todo: todo
             });
             // dispatch(INIT_TODO(todo))
@@ -37,4 +38,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(TodoList);
+)(MarkTodoList);

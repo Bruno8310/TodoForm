@@ -6,6 +6,7 @@ const todoList = (state = todos, action) => {
             return [...state, action.todo];
         case "INIT_TODO":
             return action.todo;
+            
         case "MARK_TODO":
             state.forEach(item => {
                 if (item.id === action.id) {
@@ -13,8 +14,12 @@ const todoList = (state = todos, action) => {
                 }
             })
             return [...state]
+
         case "REMOVE_TODO":
             return [...state.filter(item => item.id !== action.id)];
+
+        case "INIT_MARKED_TODO":
+            return [...state.filter(item => item.status === true)];
         default:
             return state;
     }

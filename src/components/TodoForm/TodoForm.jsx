@@ -33,7 +33,6 @@ class TodoForm extends React.Component {
         });
 
         TodoListAPI.createTodo(todo).then(response => {
-            console.log(response.data);
             this.props.addTodo(response.data);
         })
     }
