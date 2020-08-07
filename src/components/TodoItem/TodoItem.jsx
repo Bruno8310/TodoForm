@@ -3,9 +3,8 @@ import TodoListAPI from '../../api/TodoListAPI';
 class TodoItem extends React.Component {
 
     markTodoItem = event => {
-        console.log(!this.props.isMarked);
-
         const newTodo = {
+            id: this.props.id,
             status: !this.props.isMarked
         }
 
